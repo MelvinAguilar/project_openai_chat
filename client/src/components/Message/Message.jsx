@@ -51,7 +51,11 @@ const Message = ({ message, type, id, loading }) => {
       aria-atomic="true"
     >
       <div className={`${styles.chat}`}>
-        <div className={`${styles.profile}`}>
+        <div
+          className={`${styles.profile} ${
+            type === "bot" ? "bg-[#10a37f]" : "bg-[#5436DA]"
+          }`}
+        >
           <img src={type === "bot" ? bot : user} alt={type} />
         </div>
         <div className={`${styles.message}`} id={id} ref={ref}>

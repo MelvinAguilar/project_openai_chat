@@ -1,4 +1,5 @@
 import styles from "../../styles";
+import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import send from "../../assets/images/send.svg";
 
 import { useForm } from "react-hook-form";
@@ -18,7 +19,7 @@ const Form = ({ generateMessages, loading }) => {
 
   return (
     <form
-      className={`${styles.form} border-t-2 border-gray-500 text-white`}
+      className={`${styles.form} relative border-t-2 border-gray-500 text-white`}
       onSubmit={handleSubmit(onSubmit)}
     >
       <label htmlFor="code" className="sr-only">
@@ -30,7 +31,6 @@ const Form = ({ generateMessages, loading }) => {
         rows="1"
         cols="1"
         placeholder="Type your code here"
-        defaultValue="What is the difference between a variable and a constant in JavaScript?"
         className={`${styles.textarea}`}
         {...register("code", {
           required: {
@@ -39,7 +39,15 @@ const Form = ({ generateMessages, loading }) => {
           },
         })}
       />
-      <button type="submit" aria-label="Send" disabled={loading}>
+      <div aria-live="polite" aria-atomic="true">
+        {errors.code && <ErrorMessage>{errors.code.message}</ErrorMessage>}
+      </div>
+      <button
+        type="submit"
+        aria-label="Send"
+        disabled={loading}
+        className={`${loading ? "opacity-50" : ""}`}
+      >
         <img src={send} alt="" aria-hidden="true" width={24} height={24} />
       </button>
     </form>

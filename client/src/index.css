@@ -15,7 +15,7 @@
 
 @layer components {
   :is(a, button, input, textarea, select, details, summary):focus-visible {
-    outline: red solid 0.188rem;
+    outline: #575962 solid 0.15rem;
     outline-offset: 0.188rem;
   }
 
@@ -30,17 +30,17 @@
   }
 
   ::-webkit-scrollbar-track {
-    background-color: red;
+    background-color: #575962;
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: #25AFDB;
+    background-color: #77787c;
     border-radius: 1.25rem;
     border: 0.1875rem solid transparent;
     background-clip: content-box;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background-color: #39CDED;
+    background-color: #a6a7a9;
   }
 }

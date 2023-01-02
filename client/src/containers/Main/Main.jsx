@@ -2,6 +2,7 @@ import Form from "../../components/Form/Form";
 import Chat from "../../components/Chat/Chat";
 import Services from "../../services/Services";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const Main = () => {
   const [messages, setMessages] = useState([]);
@@ -47,14 +48,21 @@ const Main = () => {
     ]);
 
     setLoading(true);
-    const response = await Services.fetchResponse(text);
-    if (!response.status === 200) return false;
+    await Services.fetchResponse(text).then((response) => {
+      if (response && response.status === 200) {
+        const { bot } = response.data;
+        setLastMessage(bot.trim());
+        setLoading(false);
+      } else {
+        toast.error("Something went wrong, please try again later.");
+      }
+    });
 
-    setTimeout((prevState) => {
-      const { bot } = response.data;
-      setLastMessage(bot.trim());
-      setLoading(false);
-    }, 1000);
+    // setTimeout((prevState) => {
+    //   const { bot } = response.data;
+    //   setLastMessage(bot.trim());
+    //   setLoading(false);
+    // }, 1000);
   };
 
   const generateUniqueID = () => {
