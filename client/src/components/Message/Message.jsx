@@ -58,8 +58,8 @@ const Message = ({ message, type, id, loading }) => {
         >
           <img src={type === "bot" ? bot : user} alt={type} />
         </div>
-        <div className={`${styles.message}`} id={id} ref={ref}>
-          {type === "bot" ? text : message}
+        <div className={`${styles.message}`} id={id}>
+          <p ref={ref}>{type === "bot" ? text : message}</p>
         </div>
       </div>
     </div>
